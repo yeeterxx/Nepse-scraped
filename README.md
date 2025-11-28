@@ -29,3 +29,18 @@
 
 4) Run the file locally
 
+## Automation
+
+This scraper is designed for scheduled execution via cron (Linux/macOS). 
+
+Example cron setup (3 PM, Monday–Thursday):
+
+- Uses a virtual environment to isolate dependencies.
+- Appends daily market data to `Nepse.json`.
+- Logs output and errors to `scraper.log`.
+
+> Note: Adjust paths according to your local setup.
+
+
+
+

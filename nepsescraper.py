@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+from datetime import datetime, date
 
 url="https://merolagani.com/latestmarket.aspx"
 source= requests.get(url)
@@ -48,8 +49,19 @@ for price in price_dict:
     print("quantity:", price['qty'])
     print("-"*50)
 
-    with open ("Nepse.json", "w") as f:
-        json.dump(price_dict, f, indent=4)
+
+try:
+    with open ("Nepse.json", "r") as f:
+        all_data= json.load(f)
+except FileNotFoundError:
+     all_data=[]
+
+all_data.append({"date":str(datetime.now().date()),
+                 "data": price_dict
+                 })   
+
+with open ("Nepse.json", "w") as f:
+        json.dump(all_data, f, indent=4)
 
     
 
