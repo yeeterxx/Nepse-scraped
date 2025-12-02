@@ -9,8 +9,7 @@ log_path= "/home/aayam/Desktop/nepse_scraper/scraper.log"
 logging.basicConfig(
      filename=log_path,
      level= logging.INFO,
-     format='%(asctime)s — %(levelname)s — %(message)s',
-     force=True
+     format='%(asctime)s — %(levelname)s — %(message)s'
 
 )
 
