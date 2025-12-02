@@ -8,7 +8,7 @@ log_path= "/home/aayam/Desktop/nepse_scraper/scraper.log"
 
 logging.basicConfig(
      filename=log_path,
-     level= logging.info,
+     level= logging.INFO,
      format='%(asctime)s — %(levelname)s — %(message)s',
      force=True
 
@@ -38,7 +38,6 @@ for row in rows:
     symbol_tag= title_text.split("(")
     symbol= symbol_tag[0]
     
-
 
     tds=row.find_all("td")
 
