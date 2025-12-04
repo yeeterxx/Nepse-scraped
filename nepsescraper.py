@@ -4,7 +4,7 @@ import json
 from datetime import datetime, date
 import logging
 
-log_path= "/home/aayam/Desktop/nepse_scraper/scraper.log"
+log_path= "/home/aayam/nepse_scraper/scraper.log"
 
 logging.basicConfig(
      filename=log_path,
@@ -65,7 +65,7 @@ for price in price_dict:
     print("quantity:", price['qty'])
     print("-"*50)
 
-json_path= "/home/aayam/Desktop/nepse_scraper/Nepse.json"
+json_path= "/home/aayam/nepse_scraper/Nepse.json"
 try:
     with open (json_path, "r") as f:
         all_data= json.load(f)
