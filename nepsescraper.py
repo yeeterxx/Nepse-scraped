@@ -5,6 +5,7 @@ from datetime import datetime, date
 import logging
 
 log_path= "/home/aayam/nepse_scraper/scraper.log"
+json_path= "/home/aayam/nepse_scraper/Nepse.json"
 
 logging.basicConfig(
      filename=log_path,
@@ -13,15 +14,15 @@ logging.basicConfig(
 
 )
 
+url="https://merolagani.com/latestmarket.aspx"
 
 try:
-    url="https://merolagani.com/latestmarket.aspx"
     source= requests.get(url)
     soup=BeautifulSoup(source.text, "lxml")
-    logging.info(f"Fetched data from {url} successfully")
+    logging.info(f"Fetched data successfully")
 
 except requests.exceptions.RequestException as e:
-    logging.info(f"Failed to fetch url : {e}")
+    logging.error(f"Failed to fetch url : {e}")
 
 rows= soup.select("table.table tbody tr")
 price_dict=[]
@@ -53,19 +54,9 @@ for row in rows:
 
     price_dict.append({"title":title, "symbol":symbol, "LTP":Ltp, "change":change, "openp":openp, "high":high, "low":low, "qty":qty})
 
+logging.info("Parsed %d company rows from %s", len(price_dict), url)
 
-for price in price_dict:
-    print("Company name:", price['title'])
-    print("Symbol:", price['symbol'])
-    print("LTP:", price['LTP'])
-    print("change:", price['change'])
-    print("opening price:", price['openp'])
-    print("high:", price['high'])
-    print("low:", price['low'])
-    print("quantity:", price['qty'])
-    print("-"*50)
 
-json_path= "/home/aayam/nepse_scraper/Nepse.json"
 try:
     with open (json_path, "r") as f:
         all_data= json.load(f)
